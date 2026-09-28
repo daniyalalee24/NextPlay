@@ -1,0 +1,14 @@
+# Ignore dependencies in subfolders
+client/node_modules/
+server/node_modules/
+
+# Ignore environment variables
+client/.env
+server/.env
+
+# Ignore build outputs
+client/dist/
+server/dist/
+
+# Vercel deployment folder (if using Vercel)
+client/.vercel/
