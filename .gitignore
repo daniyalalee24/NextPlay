@@ -1,3 +1,6 @@
+# Ignore root dependencies
+node_modules/
+
 # Ignore dependencies in subfolders
 client/node_modules/
 server/node_modules/
