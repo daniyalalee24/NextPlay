@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import testRoutes from "./routes/testRoutes.js";
+import gameRoutes from "./routes/gameRoutes.js";
 
 dotenv.config();
 
@@ -12,7 +13,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
-app.use("/api/test", testRoutes);
+app.use("/api/test", testRoutes); // will delete this route later, just for testing purposes
+app.use("/api/games", gameRoutes);
 
 app.get("/api/health", (req, res) => {
   res.json({
