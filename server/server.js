@@ -5,6 +5,8 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import testRoutes from "./routes/testRoutes.js";
 import gameRoutes from "./routes/gameRoutes.js";
+import libraryRoutes from "./routes/libraryRoutes.js";
+import recommendationRoutes from "./routes/recommendations.js";
 
 dotenv.config();
 
@@ -15,6 +17,9 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/test", testRoutes); // will delete this route later, just for testing purposes
 app.use("/api/games", gameRoutes);
+app.use("/api/library", libraryRoutes);
+
+app.use("/api/recommendations", recommendationRoutes); // Add the recommendations route
 
 app.get("/api/health", (req, res) => {
   res.json({

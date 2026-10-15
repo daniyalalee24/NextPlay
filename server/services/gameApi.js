@@ -13,3 +13,13 @@ export async function searchGames(query) {
 
   return response.data;
 }
+
+export async function getGameDetails(gameId) {
+  const response = await axios.get(`${RAWG_BASE_URL}/games/${gameId}`, {
+    params: {
+      key: process.env.GAME_API_KEY,
+    },
+  });
+
+  return response.data;
+}

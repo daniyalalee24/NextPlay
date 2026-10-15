@@ -1,4 +1,5 @@
 import { searchGames } from "../services/gameApi.js";
+import { getGameDetails } from "../services/gameApi.js";
 
 // handles the request from our frontend
 export async function searchGamesController(req, res) {
@@ -19,6 +20,30 @@ export async function searchGamesController(req, res) {
 
     res.status(500).json({
       message: "Failed to fetch games",
+    });
+  }
+}
+
+// for game details, we will use the game ID to fetch the details from the RAWG API
+
+export async function getGameDetailsController(req, res) {
+  try {
+    const { id } = req.params;
+
+    const game = await getGameDetails(id);
+
+    res.json(game);
+  } catch (error) {
+    console.error("RAWG game details error:", error.message);
+
+    if (error.response?.status === 404) {
+      return res.status(404).json({
+        message: "Game not found",
+      });
+    }
+
+    res.status(500).json({
+      message: "Failed to fetch game details",
     });
   }
 }
