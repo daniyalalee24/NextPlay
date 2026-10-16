@@ -4,7 +4,7 @@ import ProductPreview from "./ProductPreview";
 const gridMask =
   "radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 80%)";
 
-const features = ["Personalized picks", "Backlog tracking", "Free to start"];
+const features = ["Personalized picks", "Library management", "Free to start"];
 
 function Check() {
   return (
@@ -67,7 +67,7 @@ export default function Hero({ user, loading }) {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-400" />
             </span>
-            YOUR PERSONAL GAMING COMPANION
+            DISCOVER. ORGANIZE. PLAY.
           </div>
 
           <h1 className="mt-7 text-4xl font-extrabold leading-tight tracking-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)] sm:text-6xl sm:leading-[1.1] lg:text-7xl">
@@ -80,7 +80,7 @@ export default function Hero({ user, loading }) {
 
           <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-gray-100/85 sm:text-lg sm:leading-8">
             Too many games, not enough time? Discover new titles, organize your
-            backlog, and find what to play next with personalized
+            library, and find what to play next with personalized
             recommendations.
           </p>
 
@@ -133,9 +133,8 @@ export default function Hero({ user, loading }) {
               </ul>
 
               {user && (
-                <p className="mt-4 text-xs text-gray-300 sm:text-sm">
-                  Welcome back, {user.name || "Gamer"}. Ready for your next
-                  adventure?
+                <p className="mt-6 text-xs text-gray-300 sm:text-sm">
+                  Ready for your next adventure?
                 </p>
               )}
             </>

@@ -1,87 +1,72 @@
-const statuses = ["Want to Play", "Playing", "Completed"];
+const statuses = ["All", "Want to Play", "Playing", "Completed"];
 
-export default function LibraryFilters({
-  statusFilter,
-  onStatusChange,
-  genreFilter,
-  onGenreChange,
-  genres,
-  favoritesOnly,
-  onFavoritesChange,
-  onReset,
-}) {
+export default function LibraryFilters({ filters, onChange, genres, onReset }) {
+  const { status, genre, favoritesOnly } = filters;
+  const isFiltered = status !== "All" || genre !== "All" || favoritesOnly;
+
   return (
-    <section className="mb-8 rounded-xl border border-gray-800 bg-gray-900 p-5">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-lg font-semibold">Filter your games</h2>
+    <section className="mb-8 rounded-2xl border border-gray-800 bg-gray-900/70 p-4 shadow-xl shadow-black/20 sm:p-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div
+          role="group"
+          aria-label="Filter by status"
+          className="flex flex-wrap gap-2"
+        >
+          {statuses.map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => onChange({ status: s })}
+              aria-pressed={status === s}
+              className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition ${
+                status === s
+                  ? "border-indigo-400/40 bg-indigo-500/15 text-indigo-300"
+                  : "border-gray-700 bg-gray-800/70 text-gray-300 hover:border-indigo-500/60 hover:text-indigo-300"
+              }`}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+
+        {isFiltered && (
+          <button
+            type="button"
+            onClick={onReset}
+            className="text-sm font-medium text-indigo-400 transition hover:text-indigo-300"
+          >
+            Reset filters
+          </button>
+        )}
+      </div>
+
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+        <select
+          value={genre}
+          onChange={(e) => onChange({ genre: e.target.value })}
+          aria-label="Filter by genre"
+          className="rounded-xl border border-gray-700 bg-gray-950 px-3 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 sm:w-60"
+        >
+          <option value="All">All genres</option>
+          {genres.map((g) => (
+            <option key={g} value={g}>
+              {g}
+            </option>
+          ))}
+        </select>
 
         <button
           type="button"
-          onClick={onReset}
-          className="text-sm text-indigo-400 hover:text-indigo-300"
+          onClick={() => onChange({ favoritesOnly: !favoritesOnly })}
+          aria-pressed={favoritesOnly}
+          className={`rounded-xl border px-4 py-2.5 text-sm font-medium transition ${
+            favoritesOnly
+              ? "border-pink-400/40 bg-pink-500/15 text-pink-300"
+              : "border-gray-700 bg-gray-950 text-gray-300 hover:border-gray-600"
+          }`}
         >
-          Reset filters
+          Favorites only
         </button>
-      </div>
-
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <div>
-          <label
-            htmlFor="status-filter"
-            className="mb-2 block text-sm text-gray-400"
-          >
-            Status
-          </label>
-
-          <select
-            id="status-filter"
-            value={statusFilter}
-            onChange={(event) => onStatusChange(event.target.value)}
-            className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm outline-none focus:border-indigo-500"
-          >
-            <option value="All">All statuses</option>
-            {statuses.map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label
-            htmlFor="genre-filter"
-            className="mb-2 block text-sm text-gray-400"
-          >
-            Genre
-          </label>
-
-          <select
-            id="genre-filter"
-            value={genreFilter}
-            onChange={(event) => onGenreChange(event.target.value)}
-            className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm outline-none focus:border-indigo-500"
-          >
-            <option value="All">All genres</option>
-            {genres.map((genre) => (
-              <option key={genre} value={genre}>
-                {genre}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="flex items-end">
-          <label className="flex w-full cursor-pointer items-center gap-3 rounded-lg border border-gray-700 bg-gray-800 px-3 py-2.5 text-sm">
-            <input
-              type="checkbox"
-              checked={favoritesOnly}
-              onChange={(event) => onFavoritesChange(event.target.checked)}
-              className="h-4 w-4 accent-pink-500"
-            />
-            <span>Favorites only ♥</span>
-          </label>
-        </div>
       </div>
     </section>
   );

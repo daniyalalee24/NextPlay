@@ -42,7 +42,7 @@ const previewCards = [
   {
     label: "ORGANIZE",
     icon: LibraryIcon,
-    title: "Manage your backlog",
+    title: "Manage your Library",
     description: "Keep your collection organized in one place.",
     iconStyle: "border-violet-400/20 bg-violet-500/10 text-violet-300",
   },

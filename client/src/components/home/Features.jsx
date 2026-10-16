@@ -89,7 +89,7 @@ export default function Features() {
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-bold tracking-[0.2em] text-indigo-400">
-            MADE FOR YOUR BACKLOG
+            MADE FOR YOUR LIBRARY
           </p>
           <h2
             id="features-heading"

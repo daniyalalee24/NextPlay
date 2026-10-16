@@ -80,7 +80,7 @@ export default function Navbar() {
         <div
           id="nav-menu"
           onClick={closeMenu}
-          className={`${open ? "flex" : "hidden"} w-full flex-col gap-2 border-t border-gray-800 py-4 sm:flex sm:w-auto sm:flex-row sm:items-center sm:border-0 sm:py-0`}
+          className={`${open ? "flex" : "hidden"} w-full flex-col gap-2 border-t border-gray-800 py-4 sm:flex sm:w-auto sm:flex-row sm:items-center sm:py-0 sm:border-0`}
         >
           {loading ? null : user ? (
             <>
@@ -89,7 +89,17 @@ export default function Navbar() {
               <NavLinkItem to="/recommend" highlight>
                 What to Play?
               </NavLinkItem>
+
               <span className="hidden h-6 w-px bg-gray-800 sm:mx-2 sm:block" />
+
+              {/* Welcome message */}
+              <p className="px-1 py-2 text-sm text-gray-400 sm:px-0 sm:py-0">
+                Hi,{" "}
+                <span className="font-semibold text-gray-200">
+                  {user.name?.trim().split(/\s+/)[0] || "Gamer"}
+                </span>
+              </p>
+
               <button
                 type="button"
                 onClick={handleLogout}
