@@ -23,3 +23,16 @@ export async function getGameDetails(gameId) {
 
   return response.data;
 }
+
+// Fetches a list of featured games based on rating, limited to 8 games
+export async function getFeaturedGames() {
+  const response = await axios.get(`${RAWG_BASE_URL}/games`, {
+    params: {
+      key: process.env.GAME_API_KEY,
+      ordering: "-rating",
+      page_size: 8,
+    },
+  });
+
+  return response.data;
+}

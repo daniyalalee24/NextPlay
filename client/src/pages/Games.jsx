@@ -1,35 +1,35 @@
 import { useState } from "react";
 import api from "../services/api";
-import GameCard from "../components/games/GameCard";
-import LoadingSkeleton from "../components/common/LoadingSkeleton";
+import GameSearch from "../components/games/GameSearch";
+import GameSearchResults from "../components/games/GameSearchResults";
 
 export default function Games() {
   const [query, setQuery] = useState("");
+  const [searchedQuery, setSearchedQuery] = useState("");
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
+  const searchGames = async (term) => {
+    const q = term.trim();
+    if (!q || loading) return;
 
-    if (!query.trim()) return;
-
+    setQuery(q);
+    setSearchedQuery(q);
     setLoading(true);
     setError("");
+    setGames([]);
     setHasSearched(true);
 
     try {
-      const response = await api.get("/api/games/search", {
-        params: {
-          query: query.trim(),
-        },
+      const { data } = await api.get("/api/games/search", {
+        params: { query: q },
       });
-
-      setGames(response.data.results || []);
-    } catch (error) {
+      setGames(data.results || []);
+    } catch (err) {
       setError(
-        error.response?.data?.message ||
+        err.response?.data?.message ||
           "Could not load games. Please try again.",
       );
     } finally {
@@ -37,77 +37,73 @@ export default function Games() {
     }
   };
 
+  const clearSearch = () => {
+    setQuery("");
+    setSearchedQuery("");
+    setGames([]);
+    setError("");
+    setHasSearched(false);
+  };
+
   return (
-    <main className="min-h-screen bg-gray-950 px-6 py-12 text-white">
-      <div className="mx-auto max-w-6xl">
-        <h1 className="mb-3 text-3xl font-bold md:text-4xl">Discover Games</h1>
-        <p className="mb-8 text-gray-400">
-          Search thousands of titles across all platforms.
-        </p>
+    <main className="relative isolate min-h-screen overflow-hidden bg-gray-950 px-4 py-10 text-white sm:px-6 sm:py-14">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-80 w-[40rem] max-w-full -translate-x-1/2 rounded-full bg-indigo-600/20 blur-3xl"
+      />
 
-        <form onSubmit={handleSearch} className="mb-10 flex gap-3">
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search games (e.g. Witcher, Tekken, Resident Evil)..."
-            aria-label="Search games"
-            className="w-full rounded-xl border border-gray-700 bg-gray-900 px-4 py-3.5 outline-none transition-colors focus:border-indigo-500"
-          />
-
-          <button
-            type="submit"
-            disabled={loading || !query.trim()}
-            className="rounded-xl bg-indigo-600 px-6 py-3.5 font-semibold transition-colors hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {loading ? "Searching..." : "Search"}
-          </button>
-        </form>
-
-        {error && (
-          <p
-            role="alert"
-            className="mb-6 rounded-lg bg-red-950 p-4 text-red-300"
-          >
-            {error}
+      <div className="mx-auto max-w-7xl">
+        <header className="mb-9">
+          <p className="text-xs font-bold tracking-[0.2em] text-indigo-400">
+            YOUR NEXT ADVENTURE STARTS HERE
           </p>
-        )}
+          <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+            Discover{" "}
+            <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-indigo-200 bg-clip-text text-transparent">
+              Games
+            </span>
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-400 sm:text-base sm:leading-7">
+            Explore thousands of games, discover your next favorite, and build
+            your personal gaming library.
+          </p>
+        </header>
 
-        {/* Initial Search Prompt State */}
-        {!hasSearched && !loading && (
-          <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-12 text-center text-gray-400">
-            <p className="text-lg font-medium text-gray-300">
-              Type a game title above to start exploring.
-            </p>
-            <p className="mt-1 text-sm">
-              Find releases, genre info, and save games directly to your
-              library.
-            </p>
+        <GameSearch
+          query={query}
+          onQueryChange={setQuery}
+          onSearch={searchGames}
+          loading={loading}
+        />
+
+        {error ? (
+          <div
+            role="alert"
+            className="flex flex-col gap-3 rounded-xl border border-red-900/60 bg-red-950/40 p-5 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div>
+              <h2 className="font-semibold text-red-300">
+                Something went wrong
+              </h2>
+              <p className="mt-1 text-sm text-red-200/80">{error}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => searchGames(searchedQuery)}
+              disabled={loading}
+              className="shrink-0 rounded-lg border border-red-800 px-4 py-2 text-sm font-medium text-red-200 transition hover:bg-red-900/50 disabled:opacity-50"
+            >
+              Try again
+            </button>
           </div>
-        )}
-
-        {/* Animated Loading Skeletons */}
-        {loading && <LoadingSkeleton count={8} />}
-
-        {/* Empty Search Results State */}
-        {hasSearched && !loading && games.length === 0 && !error && (
-          <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-12 text-center text-gray-400">
-            <p className="text-lg font-semibold text-gray-300">
-              No games found for "{query}"
-            </p>
-            <p className="mt-1 text-sm">
-              Try checking your spelling or searching for a different game.
-            </p>
-          </div>
-        )}
-
-        {/* Results Grid */}
-        {!loading && games.length > 0 && (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {games.map((game) => (
-              <GameCard key={game.id} game={game} />
-            ))}
-          </div>
+        ) : (
+          <GameSearchResults
+            games={games}
+            loading={loading}
+            hasSearched={hasSearched}
+            searchedQuery={searchedQuery}
+            onClearSearch={clearSearch}
+          />
         )}
       </div>
     </main>

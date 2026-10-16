@@ -1,5 +1,8 @@
-import { searchGames } from "../services/gameApi.js";
-import { getGameDetails } from "../services/gameApi.js";
+import {
+  searchGames,
+  getGameDetails,
+  getFeaturedGames,
+} from "../services/gameApi.js";
 
 // handles the request from our frontend
 export async function searchGamesController(req, res) {
@@ -44,6 +47,20 @@ export async function getGameDetailsController(req, res) {
 
     res.status(500).json({
       message: "Failed to fetch game details",
+    });
+  }
+}
+
+// Fetches a list of featured games based on rating, limited to 8 games
+export async function getFeaturedGamesController(req, res) {
+  try {
+    const games = await getFeaturedGames();
+    res.json(games);
+  } catch (error) {
+    console.error("RAWG featured games error:", error.message);
+
+    res.status(500).json({
+      message: "Failed to fetch featured games",
     });
   }
 }

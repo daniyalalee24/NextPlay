@@ -8,6 +8,7 @@ import Games from "./pages/Games";
 import GameDetails from "./pages/GameDetails";
 import Recommend from "./pages/Recommend";
 import Navbar from "./components/common/Navbar";
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
           <Route path="/recommend" element={<Recommend />} />
         </Route>
       </Routes>
+
+      <Footer />
     </BrowserRouter>
   );
 }
