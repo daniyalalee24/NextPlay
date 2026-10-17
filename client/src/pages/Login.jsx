@@ -34,7 +34,7 @@ export default function Login() {
     <AuthLayout
       title="Welcome"
       accent="back"
-      subtitle="Log in to manage your game library and discover your next adventure."
+      subtitle="Please sign in to continue"
       error={error}
       onSubmit={handleSubmit}
       submitting={submitting}

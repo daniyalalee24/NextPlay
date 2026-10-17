@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/common/ProtectedRoute";
 import Games from "./pages/Games";
 import GameDetails from "./pages/GameDetails";
 import Recommend from "./pages/Recommend";
+import About from "./pages/About";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/games" element={<Games />} />
         <Route path="/games/:id" element={<GameDetails />} />
+        <Route path="/about" element={<About />} />
 
         {/* Protected Routes (using Outlet inside ProtectedRoute) */}
         <Route element={<ProtectedRoute />}>

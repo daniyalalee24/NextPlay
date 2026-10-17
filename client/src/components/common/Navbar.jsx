@@ -89,14 +89,15 @@ export default function Navbar() {
               <NavLinkItem to="/recommend" highlight>
                 What to Play?
               </NavLinkItem>
+              <NavLinkItem to="/about">About Us</NavLinkItem>
 
               <span className="hidden h-6 w-px bg-gray-800 sm:mx-2 sm:block" />
 
               {/* Welcome message */}
-              <p className="px-1 py-2 text-sm text-gray-400 sm:px-0 sm:py-0">
+              <p className="px-1 py-2 text-sm text-gray-400 sm:px-0 sm:py-0 text-center">
                 Hi,{" "}
                 <span className="font-semibold text-gray-200">
-                  {user.name?.trim().split(/\s+/)[0] || "Gamer"}
+                  {user.name?.trim().split(/\s+/)[0] || "Gamer"}!
                 </span>
               </p>
 

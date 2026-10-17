@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+const PORTFOLIO = "https://daniyal-portfolio-omega.vercel.app/";
+
 const focus =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950";
 
@@ -7,9 +9,16 @@ const navLinks = [
   { to: "/games", label: "Discover" },
   { to: "/library", label: "My Library" },
   { to: "/recommend", label: "What to Play?" },
+  { to: "/about", label: "About Us" },
 ];
 
 const socials = [
+  {
+    label: "Portfolio",
+    href: PORTFOLIO,
+    external: true,
+    icon: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18",
+  },
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/daniyalalee/",
@@ -54,79 +63,15 @@ function GamepadIcon({ className = "h-5 w-5" }) {
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-gray-800/80 bg-gray-950">
-      {/* Subtle ambient glow */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-0 h-48 w-[min(700px,100%)] -translate-x-1/2 rounded-full bg-indigo-600/[0.07] blur-3xl"
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        {/* Portfolio call to action */}
-
-        <section className="py-10 sm:py-14">
-          <div className="relative overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/70 p-6 sm:p-8 lg:p-10">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-16 -top-24 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -bottom-28 left-1/3 h-48 w-48 rounded-full bg-violet-500/[0.08] blur-3xl"
-            />
-
-            <div className="relative flex flex-col items-center gap-6 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-              <div className="max-w-xl">
-                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-indigo-400/20 bg-indigo-400/[0.07] px-3 py-1.5">
-                  <span
-                    aria-hidden="true"
-                    className="h-1.5 w-1.5 rounded-full bg-indigo-400"
-                  />
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-indigo-300">
-                    More from the developer
-                  </span>
-                </div>
-
-                <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl lg:text-3xl">
-                  Enjoyed NextPlay?
-                  <span className="mt-1 block text-gray-400">
-                    There's more to explore.
-                  </span>
-                </h2>
-
-                <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-gray-400 sm:mx-0 sm:text-base">
-                  Take a look at my portfolio to see more projects, what I've
-                  been building, and the technologies I work with.
-                </p>
-              </div>
-
-              <a
-                href="https://daniyal-portfolio-omega.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`group inline-flex w-full shrink-0 items-center justify-center gap-2.5 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-950/30 transition duration-200 hover:-translate-y-0.5 hover:bg-indigo-500 sm:w-auto ${focus}`}
-              >
-                Explore my portfolio
-                <svg
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden="true"
-                >
-                  <path d="M7 13 14 6M6 6h8v8" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* Main footer */}
-        <div className="grid grid-cols-1 gap-9 border-t border-gray-800/80 py-9 sm:grid-cols-2 sm:gap-8 lg:grid-cols-[1.4fr_1fr_0.8fr] lg:py-10">
+        <div className="grid grid-cols-1 gap-9 py-9 sm:grid-cols-2 sm:gap-8 lg:grid-cols-[1.4fr_1fr_0.8fr] lg:py-10">
           {/* Brand */}
-          <div className="flex flex-col items-center text-center sm:col-span-2 sm:items-start sm:text-left lg:col-span-1">
+          <div className="flex flex-col items-start sm:col-span-2 lg:col-span-1">
             <Link
               to="/"
               aria-label="NextPlay home"
@@ -135,7 +80,6 @@ export default function Footer() {
               <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-indigo-400/25 bg-gradient-to-br from-indigo-500/20 to-violet-500/10 text-indigo-300 transition-colors group-hover:border-indigo-400/50 group-hover:text-indigo-200">
                 <GamepadIcon />
               </span>
-
               <span className="text-2xl font-extrabold tracking-tight text-white">
                 <span className="bg-gradient-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent">
                   Next
@@ -147,8 +91,7 @@ export default function Footer() {
             <p className="mt-3 max-w-xs text-sm leading-6 text-gray-500">
               Discover games, build your library, and find what to play next.
             </p>
-
-            <p className="mt-4 text-xs font-medium tracking-wide text-gray-600">
+            <p className="mt-4 text-xs font-medium tracking-wide text-gray-500">
               A SMARTER WAY TO FIND YOUR NEXT GAME
             </p>
           </div>
@@ -156,13 +99,12 @@ export default function Footer() {
           {/* Navigation */}
           <nav
             aria-label="Footer navigation"
-            className="flex flex-col items-center gap-3 sm:items-start"
+            className="flex flex-col items-start gap-3"
           >
             <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-gray-300">
               Explore
             </h3>
-
-            <div className="flex flex-col items-center gap-2 sm:items-start">
+            <div className="flex flex-col items-start gap-2">
               {navLinks.map(({ to, label }) => (
                 <Link
                   key={to}
@@ -176,16 +118,14 @@ export default function Footer() {
           </nav>
 
           {/* Connect */}
-          <div className="flex flex-col items-center gap-3 sm:items-start">
+          <div className="flex flex-col items-start gap-3">
             <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-gray-300">
               Connect
             </h3>
-
-            <p className="text-center text-sm text-gray-500 sm:text-left">
+            <p className="text-sm text-gray-500">
               Find me online or get in touch.
             </p>
-
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {socials.map(({ label, href, external, filled, icon }) => (
                 <a
                   key={label}
@@ -217,14 +157,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-gray-800/80 py-5 text-center sm:flex-row sm:text-left">
-          <p className="text-xs text-gray-500">
-            © {new Date().getFullYear()} NextPlay. All rights reserved.
-          </p>
-
-          <p className="text-xs text-gray-500">
+        <div className="flex flex-col items-center text-center justify-between gap-2 border-t border-gray-800/80 py-5 text-xs text-gray-500 sm:flex-row sm:items-center">
+          <p>© {new Date().getFullYear()} NextPlay. All rights reserved.</p>
+          <p>
             Designed & built by{" "}
-            <span className="font-medium text-gray-300">Daniyal Ali</span>
+            <a
+              href={PORTFOLIO}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`rounded font-medium text-gray-300 transition-colors hover:text-indigo-300 ${focus}`}
+            >
+              Daniyal Ali
+            </a>
           </p>
         </div>
       </div>
