@@ -39,8 +39,26 @@ const links = [
 
 const gradient =
   "bg-gradient-to-r from-indigo-300 via-violet-300 to-indigo-200 bg-clip-text text-transparent";
-const eyebrow =
-  "text-xs font-bold tracking-[0.2em] text-indigo-400 text-center";
+
+// Eyebrow + title. `center` = left on mobile, centered from sm up.
+function Heading({ id, eyebrow, center, big, children }) {
+  const Tag = big ? "h1" : "h2";
+  return (
+    <div className={center ? "text-left sm:text-center" : ""}>
+      <p className="text-xs font-bold tracking-[0.2em] text-indigo-400">
+        {eyebrow}
+      </p>
+      <Tag
+        id={id}
+        className={`mt-3 font-extrabold tracking-tight ${
+          big ? "text-3xl sm:text-5xl" : "text-2xl sm:text-3xl"
+        }`}
+      >
+        {children}
+      </Tag>
+    </div>
+  );
+}
 
 export default function About() {
   const { user } = useAuth();
@@ -54,32 +72,25 @@ export default function About() {
 
       <div className="mx-auto max-w-7xl space-y-16 sm:space-y-20">
         {/* Header */}
-        <header className="mx-auto max-w-3xl text-start">
-          <p className={eyebrow}>ABOUT NEXTPLAY</p>
-          <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">
+        <header className="mx-auto max-w-3xl">
+          <Heading eyebrow="ABOUT NEXTPLAY" center big>
             Your backlog is long.{" "}
             <span className={gradient}>Your time isn't.</span>
-          </h1>
-          <p className="mt-4 text-sm leading-6 text-gray-400 sm:text-base sm:leading-7">
+          </Heading>
+          <p className="mt-4 text-sm leading-6 text-gray-400 sm:text-center sm:text-base sm:leading-7">
             NextPlay is a personal gaming companion that helps you discover
             games, organize what you own, and decide what to play next, without
             the endless scrolling.
           </p>
         </header>
 
-        {/* What we believe */}
+        {/* Values */}
         <section aria-labelledby="values-heading">
-          <div className="mb-8 text-center">
-            <p className={eyebrow}>WHAT WE BELIEVE</p>
-            <h2
-              id="values-heading"
-              className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl"
-            >
-              Choosing a game should be <span className={gradient}>fun</span>
-            </h2>
-          </div>
+          <Heading id="values-heading" eyebrow="WHAT WE BELIEVE" center>
+            Choosing a game should be <span className={gradient}>fun</span>
+          </Heading>
 
-          <ul className="grid gap-5 md:grid-cols-3">
+          <ul className="mt-8 grid gap-5 md:grid-cols-3">
             {values.map(({ title, text, icon }) => (
               <li
                 key={title}
@@ -111,13 +122,9 @@ export default function About() {
           aria-labelledby="steps-heading"
           className="rounded-2xl border border-gray-800 bg-gray-900/70 p-6 shadow-xl shadow-black/20 sm:p-10"
         >
-          <p className={eyebrow}>HOW IT WORKS</p>
-          <h2
-            id="steps-heading"
-            className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl"
-          >
+          <Heading id="steps-heading" eyebrow="HOW IT WORKS">
             From search to play in three steps
-          </h2>
+          </Heading>
 
           <ol className="mt-8 grid gap-6 md:grid-cols-3">
             {steps.map(([title, text], i) => (
@@ -134,7 +141,7 @@ export default function About() {
           </ol>
         </section>
 
-        {/* Maker */}
+        {/* Builder */}
         <section
           aria-labelledby="maker-heading"
           className="relative isolate overflow-hidden rounded-3xl border border-indigo-400/20 bg-gradient-to-br from-gray-900 to-indigo-950/50 p-6 shadow-2xl shadow-indigo-950/30 sm:p-10"
@@ -143,7 +150,7 @@ export default function About() {
             aria-hidden="true"
             className="pointer-events-none absolute -right-16 -top-20 -z-10 h-64 w-64 rounded-full bg-indigo-600/30 blur-3xl"
           />
-          <div className="flex flex-col items-center gap-6 text-left md:flex-row md:text-left">
+          <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
             <span
               aria-hidden="true"
               className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border border-indigo-400/30 bg-gradient-to-br from-indigo-500/40 to-violet-500/20 text-2xl font-extrabold text-indigo-100 sm:h-24 sm:w-24 sm:text-3xl"
@@ -152,21 +159,17 @@ export default function About() {
             </span>
 
             <div className="flex-1">
-              <p className={eyebrow}>THE BUILDER</p>
-              <h2
-                id="maker-heading"
-                className="mt-2 text-2xl font-bold tracking-tight"
-              >
+              <Heading id="maker-heading" eyebrow="THE BUILDER">
                 Hi, I'm Daniyal
-              </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-300 sm:text-base sm:leading-7">
+              </Heading>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-300 sm:text-base sm:leading-7">
                 I designed and built NextPlay as a full-stack project because I
                 kept running out of time before I ran out of games. It pulls
                 data from the RAWG API and ranks games with a custom scoring
                 engine based on your genres, free time and ratings.
               </p>
 
-              <div className="mt-5 flex flex-wrap gap-2 md:justify-start">
+              <div className="mt-5 flex flex-wrap gap-2">
                 {links.map(({ label, href }) => (
                   <a
                     key={label}

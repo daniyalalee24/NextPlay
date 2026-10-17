@@ -1,41 +1,63 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Library from "./pages/Library";
-import ProtectedRoute from "./components/common/ProtectedRoute";
-import Games from "./pages/Games";
-import GameDetails from "./pages/GameDetails";
-import Recommend from "./pages/Recommend";
-import About from "./pages/About";
+import { useEffect } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Games from "./pages/Games";
+import GameDetails from "./pages/GameDetails";
+import About from "./pages/About";
+import Library from "./pages/Library";
+import Recommend from "./pages/Recommend";
 
-function App() {
+// Start every page at the top when the route changes
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+export default function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      <ScrollToTop />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
+      <div className="min-h-screen bg-gray-950 text-white">
+        <Navbar />
 
-        {/* Public Routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/games" element={<Games />} />
-        <Route path="/games/:id" element={<GameDetails />} />
-        <Route path="/about" element={<About />} />
+        <Routes>
+          {/* Public */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/games" element={<Games />} />
+          <Route path="/games/:id" element={<GameDetails />} />
+          <Route path="/about" element={<About />} />
 
-        {/* Protected Routes (using Outlet inside ProtectedRoute) */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/library" element={<Library />} />
-          <Route path="/recommend" element={<Recommend />} />
-        </Route>
-      </Routes>
+          {/* Protected */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/library" element={<Library />} />
+            <Route path="/recommend" element={<Recommend />} />
+          </Route>
 
-      <Footer />
+          {/* Unknown URLs go home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }
-
-export default App;
