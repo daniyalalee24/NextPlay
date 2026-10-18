@@ -14,12 +14,22 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Ensure Database is connected per request without killing the Node process
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    res.status(500).json({ error: "Database connection failed" });
+  }
+});
+
 app.use("/api/auth", authRoutes);
-app.use("/api/test", testRoutes); // will delete this route later, just for testing purposes
+app.use("/api/test", testRoutes);
 app.use("/api/games", gameRoutes);
 app.use("/api/library", libraryRoutes);
-
-app.use("/api/recommendations", recommendationRoutes); // Add the recommendations route
+app.use("/api/recommendations", recommendationRoutes);
 
 app.get("/api/health", (req, res) => {
   res.json({
@@ -30,9 +40,6 @@ app.get("/api/health", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-connectDB();
-
-// app.listen for local development
 if (process.env.NODE_ENV !== "production") {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }
