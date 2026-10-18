@@ -26,7 +26,7 @@ As a gamer, I always struggled to keep track of what I was currently playing, wh
 
 ---
 
-_(Application Interface)_
+## 🛠️ Screenshots
 
 ### 1. Home Page
 
