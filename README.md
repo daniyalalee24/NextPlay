@@ -1,7 +1,6 @@
 # NextPlay 🎮 | Full-Stack Smart Game Recommendation Web App
 
-**Live Demo:** [https://next-play-1nb4.vercel.app/](https://next-play-1nb4.vercel.app/)  
-**Backend API:** [https://next-play-gules.vercel.app](https://next-play-gules.vercel.app)
+**Live Demo:** [https://next-play-1nb4.vercel.app/](https://next-play-1nb4.vercel.app/)
 
 ## 📝 What is NextPlay?
 
