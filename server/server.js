@@ -15,7 +15,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Ensure Database is connected per request without killing the Node process
+// Connect to the database before handling any requests
 app.use(async (req, res, next) => {
   try {
     await connectDB();
@@ -30,6 +30,11 @@ app.use("/api/test", testRoutes);
 app.use("/api/games", gameRoutes);
 app.use("/api/library", libraryRoutes);
 app.use("/api/recommendations", recommendationRoutes);
+
+// Add this block to handle the root URL
+app.get("/", (req, res) => {
+  res.send("NextPlay API is running perfectly on Vercel!");
+});
 
 app.get("/api/health", (req, res) => {
   res.json({
