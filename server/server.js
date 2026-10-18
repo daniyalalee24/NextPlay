@@ -33,7 +33,7 @@ app.use("/api/recommendations", recommendationRoutes);
 
 // Add this block to handle the root URL
 app.get("/", (req, res) => {
-  res.send("NextPlay API is running perfectly on Vercel!");
+  res.send("NextPlay API is running!");
 });
 
 app.get("/api/health", (req, res) => {
