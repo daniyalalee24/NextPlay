@@ -31,19 +31,19 @@ _(Application Interface)_
 
 ### 1. Game Discovery & Dashboard
 
-![NextPlay Dashboard](./screenshots/screenshot1.png)
+![NextPlay Dashboard](./screenshots/screenshot1.jpeg)
 
 ### 2. For Discovering New Games
 
-![Discover New Games Page](./screenshots/screenshot2.png)
+![Discover New Games Page](./screenshots/screenshot2.jpeg)
 
 ### 3. Personal Game Library
 
-![Personal Library](./screenshots/screenshot3.png)
+![Personal Library](./screenshots/screenshot3.jpeg)
 
 ### 4. Smart Recommendations
 
-![Recommendation Engine](./screenshots/screenshot4.png)
+![Recommendation Engine](./screenshots/screenshot4.jpeg)
 
 ---
 
