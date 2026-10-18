@@ -29,9 +29,9 @@ As a gamer, I always struggled to keep track of what I was currently playing, wh
 
 _(Application Interface)_
 
-### 1. Game Discovery & Dashboard
+### 1. Home Page
 
-![NextPlay Dashboard](./screenshots/screenshot1.jpeg)
+![NextPlay Home Page](./screenshots/screenshot1.jpeg)
 
 ### 2. For Discovering New Games
 
